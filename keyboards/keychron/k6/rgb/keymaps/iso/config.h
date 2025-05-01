@@ -43,3 +43,9 @@
 
 /* Debounce reduces chatter (unintended double-presses) - set 0 if debouncing is not needed */
 #define DEBOUNCE 10
+
+#undef TAPPING_TERM
+#define TAPPING_TERM 250
+#define RETRO_TAPPING
+#define PERMISSIVE_HOLD
+#define IGNORE_MOD_TAP_INTERRUPT
