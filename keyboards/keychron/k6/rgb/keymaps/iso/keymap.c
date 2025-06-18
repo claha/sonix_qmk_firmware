@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _BL 0
 #define _FL 1
 #define _SL 2
+#define _CM 3
 
 #define HOME_A LSFT_T(KC_A)
 #define HOME_S LCTL_T(KC_S)
@@ -29,6 +30,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define HOME_K LGUI_T(KC_K)
 #define HOME_L LCTL_T(KC_L)
 #define HOME_SCLN LSFT_T(KC_SCLN)
+
+#define CM_A LSFT_T(KC_A)
+#define CM_R LCTL_T(KC_R)
+#define CM_S LGUI_T(KC_S)
+#define CM_T LALT_T(KC_T)
+
+#define CM_N LALT_T(KC_N)
+#define CM_E LGUI_T(KC_E)
+#define CM_I LCTL_T(KC_I)
+#define CM_O LSFT_T(KC_O)
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
@@ -74,7 +85,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       [_FL] = { {   KC_NO,     RGB_HUD,   RGB_HUI,   KC_NO,   KC_NO,   RGB_VAD, RGB_VAI,  KC_MPRV, KC_MPLY, KC_MNXT,   KC_MUTE,   KC_VOLD,   KC_VOLU,   KC_NO,     KC_NO,     RGB_MOD    },
                 {   KC_NO,     KC_NO,     KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,   KC_NO,     KC_NO,     KC_NO,     KC_END,    KC_NO,     KC_NO,     KC_NO      },
                 {   KC_NO,     KC_NO,     KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO      },
-                {   KC_NO,     KC_NO,     KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     RGB_SPI,   KC_NO      },
+                {   KC_NO,     DF(_CM),   DF(_BL),   KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     RGB_SPI,   KC_NO      },
                 {   KC_NO,     KC_NO,     KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     RGB_TOG,   RGB_SPD,   RGB_M_P    }
               },
 /* _SL
@@ -94,7 +105,26 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                 {   KC_NO,     KC_NO,     KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO      },
                 {   KC_NO,     KC_NO,     KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO      },
                 {   KC_NO,     KC_NO,     KC_NO,     KC_NO,   KC_NO,   KC_NO,   KC_NO,    KC_NO,   KC_NO,   KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO,     KC_NO      }
-              }
+              },
+/* _CM
+ * ┌───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───────┬───┐
+ * │ESC│ 1 │ 2 │ 3 │ 4 │ 5 │ 6 │ 7 │ 8 │ 9 │ 0 │ + │ ´ │       │PRT│
+ * ├───┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─────┼───┤
+ * │     │ Q │ W │ F │ P │ G │_J │ L │ U │ Y │ Ö │ Å │ ¨ │     │DEL│
+ * ├─────┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┬──┴┐    ├───┤
+ * │      │ A │ R │ S │ T │ D │ H │ N │ E │ I │ O │ Ä │ ' │    │PUP│
+ * ├────┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴─┬─┴───┴┬───┼───┤
+ * │    │ < │ Z │ X │ C │ V │ B │ K │ M │ , │ . │ - │      │UP │PDN│
+ * ├────┼───┴┬──┴─┬─┴───┴───┴───┴───┴───┴──┬┴──┬┴──┬┴──┬───┼───┼───┤
+ * │CTRL│ WIN│ALT │                        │ALT│FN1│FN2│LFT│DWN│RGT│
+ * └────┴────┴────┴────────────────────────┴───┴───┴───┴───┴───┴───┘
+ *      Row:        0          1          2          3        4        5        6         7        8        9          10         11         12         13         14         15        */
+      [_CM] = { {   KC_GESC,   KC_1,      KC_2,      KC_3,    KC_4,    KC_5,    KC_6,     KC_7,    KC_8,    KC_9,      KC_0,      KC_MINS,   KC_EQL,    KC_BSPC,   KC_NO,     KC_PSCREEN },
+                {   KC_TAB,    KC_Q,      KC_W,      KC_F,    KC_P,    KC_G,    KC_J,     KC_L,    KC_U,    KC_Y,      KC_SCLN,   KC_LBRC,   KC_RBRC,   KC_NO,     KC_NO,     KC_DEL     },
+                {   KC_CAPS,   CM_A,      CM_R,      CM_S,    CM_T,    KC_D,    KC_H,     CM_N,    CM_E,    CM_I,      CM_O,      KC_QUOT,   KC_NUHS,   KC_ENT,    KC_NO,     KC_PGUP    },
+                {   KC_LSFT,   KC_NUBS,   KC_Z,      KC_X,    KC_C,    KC_V,    KC_B,     KC_K,    KC_M,    KC_COMM,   KC_DOT,    KC_SLSH,   KC_NO,     KC_RSFT,   KC_UP,     KC_PGDN    },
+                {   KC_LCTL,   KC_LGUI,   KC_LALT,   KC_NO,   KC_NO,   KC_NO,   KC_SPC,   KC_NO,   KC_NO,   KC_NO,     KC_RALT,   MO(_FL),   MO(_SL),   KC_LEFT,   KC_DOWN,   KC_RGHT    }
+              },
 };
 void dip_switch_update_user(uint8_t index, bool active){
   switch(index){
